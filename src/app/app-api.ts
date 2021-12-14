@@ -1,0 +1,1 @@
+export const URL_API = 'https://v6.exchangerate-api.com/v6/6778d2d77a07f77020b6bf1c'

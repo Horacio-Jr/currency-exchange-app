@@ -1,0 +1,44 @@
+<div style="margin-top: 50px;">
+    <div class="card">
+        <div class="card-header">
+            Conversor de Moeda
+        </div>
+        <div class="card-body">
+            <form [formGroup]="conversionForm">
+                <div class="mb-3 row">
+                    <label for="cbxCurrencyFrom" class="col-md-2 col-form-label">From:</label>
+                    <div class="col-md-4">
+                        <select id="cbxCurrencyFrom" #fromCurrency formControlName="from"
+                            class="form-select form-control form-control-lg" aria-label="Default select example"
+                            (change)="convertValue(valueToConvert.value, fromCurrency.value, toCurreny.value)">
+                            <option *ngFor="let currency of currencies" [value]="currency.code">{{currency.code}} -
+                                {{currency.name}}</option>
+                        </select>
+                    </div>
+                    <label for="cbxCurrencyTo" class="col-md-2 col-form-label">To:</label>
+                    <div class="col-md-4">
+                        <select id="cbxCurrencyTo" #toCurreny formControlName="to"
+                            class="form-select form-control form-control-lg" aria-label="Default select example"
+                            (change)="convertValue(valueToConvert.value, fromCurrency.value, toCurreny.value)">
+                            <option *ngFor="let currency of currencies" [value]="currency.code">{{currency.code}} -
+                                {{currency.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="rawValueField" class="col-md-2 col-form-label">Raw value:</label>
+                    <div class="col-md-4">
+                        <input id="rawValueField" #valueToConvert
+                            (keyup)="convertValue(valueToConvert.value, fromCurrency.value, toCurreny.value)"
+                            formControlName="rawValue" type="number" class="form-control form-control-lg">
+                    </div>
+                    <label for="resultValueField" class="col-md-2 col-form-label">Result value:</label>
+                    <div class="col-md-4">
+                        <input id="resultValueField" formControlName="resultValue" type="number" readonly
+                            class="form-control form-control-lg">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
