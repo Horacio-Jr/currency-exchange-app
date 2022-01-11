@@ -43,7 +43,7 @@ export class ConvertFormComponent implements OnInit {
    * método para o preenchimento 
    * dos arrays comboboxs das moedas
    *  */
-   private fillCurrenciesCbx(): void {
+  private fillCurrenciesCbx(): void {
     for (let currency of this.currencyService.getAllCurrencies()) {
       this.currencies.push(currency);
     }
@@ -66,6 +66,8 @@ export class ConvertFormComponent implements OnInit {
 
     this.conversion.subscribe((result: ConversionDetail) => {
       this.conversionForm.get('resultValue')?.setValue(result.conversion_result);
+    }, (erro: any) => {
+      console.log("Sorry we have some error => code:", erro.status);
     });
   }
 
