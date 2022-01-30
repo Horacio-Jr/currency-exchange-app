@@ -1,4 +1,8 @@
+
 <div style="margin-top: 50px;">
+    <div *ngIf="errorStatus" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Network error </strong> => sorry we have some error.
+      </div> 
     <div class="card">
         <div class="card-header">
             Conversor de Moeda

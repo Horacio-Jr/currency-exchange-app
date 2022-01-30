@@ -13,6 +13,8 @@ import { ExchangeService } from 'src/app/services/exchange.service';
   providers: [CurrencyService, ExchangeService]
 })
 export class ConvertFormComponent implements OnInit {
+
+  public errorStatus: boolean = false;
   /**
    *  array para o preenchimento das comboboxs das moedas
    *  */
@@ -67,6 +69,7 @@ export class ConvertFormComponent implements OnInit {
     this.conversion.subscribe((result: ConversionDetail) => {
       this.conversionForm.get('resultValue')?.setValue(new Intl.NumberFormat('de-DE', { style: 'currency', currency: this.currencies[99].code }).format(Number(result.conversion_result)));
     }, (erro: any) => {
+      this.errorStatus = true;
       console.log("Sorry we have some error => code:", erro.status);
     });
   }
@@ -82,6 +85,7 @@ export class ConvertFormComponent implements OnInit {
         this.conversionForm.get('resultValue')?.setValue(new Intl.NumberFormat('de-DE', { style: 'currency', currency: toCurreny }).format(Number(result.conversion_result)));
       },
       (erro: any) => {
+        this.errorStatus = true;
         console.log("Sorry we have some error => code:", erro.status);
       }
     );
