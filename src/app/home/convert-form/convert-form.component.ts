@@ -54,8 +54,8 @@ export class ConvertFormComponent implements OnInit {
    * com valores iniciais
    *  */
   private conversionFormInitData(): void {
-    this.conversionForm.get('from')?.setValue(this.currencies[99].code); /** inicializa a dropdown "from" com a moeda MZN */
-    this.conversionForm.get('to')?.setValue(this.currencies[145].code); /** inicializa a dropdown "to" com a moeda USD */
+    this.conversionForm.get('from')?.setValue(this.currencies[145].code); /** inicializa a dropdown "from" com a moeda MZN */
+    this.conversionForm.get('to')?.setValue(this.currencies[99].code); /** inicializa a dropdown "to" com a moeda USD */
     this.conversionForm.get('rawValue')?.setValue(1); /** inicializa o campo "Raw Value" com o valor 1 */
 
     var amount = this.conversionForm.get('rawValue')?.value;
@@ -65,7 +65,7 @@ export class ConvertFormComponent implements OnInit {
     this.conversion = this.exchangeService.convertTo(amount, fromCurrency, toCurrency);
 
     this.conversion.subscribe((result: ConversionDetail) => {
-      this.conversionForm.get('resultValue')?.setValue(result.conversion_result);
+      this.conversionForm.get('resultValue')?.setValue(new Intl.NumberFormat('de-DE', { style: 'currency', currency: this.currencies[99].code }).format(Number(result.conversion_result)));
     }, (erro: any) => {
       console.log("Sorry we have some error => code:", erro.status);
     });
@@ -79,7 +79,7 @@ export class ConvertFormComponent implements OnInit {
     this.conversion = this.exchangeService.convertTo(Number(valueToConvert), fromCurrency, toCurreny);
     this.conversion.subscribe(
       (result: ConversionDetail) => {
-        this.conversionForm.get('resultValue')?.setValue(result.conversion_result);
+        this.conversionForm.get('resultValue')?.setValue(new Intl.NumberFormat('de-DE', { style: 'currency', currency: toCurreny }).format(Number(result.conversion_result)));
       },
       (erro: any) => {
         console.log("Sorry we have some error => code:", erro.status);
